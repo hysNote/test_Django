@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_messages %}
+    <title>测试组</title>
+    <script src="/static/bootstrap/jquery/jquery-3.4.1.min.js"></script>
+
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+<div class="container-fluid">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">企业金融-测试组</a>
+    </div>
+    <div class="navbar-header">
+        <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a id="dLabel" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+    MQ消息推送
+    <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu",aria-labelledby="dLabel">
+            <li><a href="#">垫佣贝</a></li>
+            <li><a href="#">店东贷</a></li>
+            <li><a href="#">商户</a></li>
+            <li><a href="#">其它</a></li>
+            </ul>
+        </li>
+        </ul>
+    </div>
+</div>
+</nav>
+    <form method="post" action="/push/">
+        <h3>推送消息内容：</h3>
+        <div class="form-group">
+            <label class="col-sm-2 custom-control-label">队列名：</label>
+            <select  class="form-control" >
+                <option>q_fund_cf_lending_remit_notify_test</option>
+                <option>其它</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 custom-control-label">消息：</label>
+            <input name="mq_message" class="form-control" type="text" >
+        </div>
+        <button id="btn" type="submit">推送</button>
+        {% csrf_token %}
+    </form>
+</div>
+</body>
+</html>
