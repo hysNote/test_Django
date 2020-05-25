@@ -1,20 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
+from django.contrib import messages
 import pika;
 import json;
+
 
 def mainPage(request):
     return render(request, "mainPage.html")
 
 def mq_push(request):
-    mq_message=request.POST.get('mq_message','')
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='172.29.64.110', port=5672, virtual_host='/',
-                                                                   credentials=pika.PlainCredentials('bkjkmq',
-                                                                                                     'bkjkmq123456')))
-    channel = connection.channel()
-    channel.queue_declare(queue='q_fund_cf_lending_remit_notify_test', durable=True)
-    # body为想要传入的mq消息
-    body = mq_message
-    channel.basic_publish(exchange='', routing_key='q_fund_cf_lending_remit_notify_test', body=body)
-    connection.close()
-    return HttpResponse('push success')
+    mq_message={
+	"requestId": "8c9c0a2d-3ddf-4a8f-8c0d-7157018f81ff",
+	"createTime": "2019-12-06 19:14:16",
+	"statusDate": "2019-12-06 19:14:16",
+	"loanAppCode": "LA1320191206192449250930008",
+	"loanAppStatus": "AUDIT_RESULT_SUCCEEDED"
+}
+
+
+
+
+def TestCase(request):
+    return render(request,"TestCase.html")
